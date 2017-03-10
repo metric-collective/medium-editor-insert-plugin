@@ -413,7 +413,7 @@
                 }
             });
 
-            if ($p.length && (($p.text().trim() === '' && !activeAddon) || activeAddon === 'images')) {
+            if ($p.length && ($p.text().trim() === '') && !activeAddon) {
                 $p.addClass('medium-insert-active');
 
                 if (activeAddon === 'images') {

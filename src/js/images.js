@@ -274,6 +274,7 @@
                 }
             });
         }
+
     };
 
     /**
@@ -785,11 +786,13 @@
         if(IMAGE_DRAGGER._dragging != null) {
             var dragging = IMAGE_DRAGGER._dragging;
             var target = IMAGE_DRAGGER.findDropTarget(event.target);
-            IMAGE_DRAGGER.clearTarget();
-            IMAGE_DRAGGER._dragging = null;
-            dragging.remove();
-            target.after(dragging);
-            IMAGE_DRAGGER.connect();
+            if(target != null && !target.is(dragging)) {
+                IMAGE_DRAGGER.clearTarget();
+                IMAGE_DRAGGER._dragging = null;
+                dragging.remove();
+                target.after(dragging);
+                IMAGE_DRAGGER.connect();
+            }
         }
     }
 

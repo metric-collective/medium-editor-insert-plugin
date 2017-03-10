@@ -577,7 +577,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                 }
             });
 
-            if ($p.length && (($p.text().trim() === '' && !activeAddon) || activeAddon === 'images')) {
+            if ($p.length && ($p.text().trim() === '') && !activeAddon) {
                 $p.addClass('medium-insert-active');
 
                 if (activeAddon === 'images') {
@@ -1838,6 +1838,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                 }
             });
         }
+
     };
 
     /**
@@ -2349,11 +2350,13 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
         if(IMAGE_DRAGGER._dragging != null) {
             var dragging = IMAGE_DRAGGER._dragging;
             var target = IMAGE_DRAGGER.findDropTarget(event.target);
-            IMAGE_DRAGGER.clearTarget();
-            IMAGE_DRAGGER._dragging = null;
-            dragging.remove();
-            target.after(dragging);
-            IMAGE_DRAGGER.connect();
+            if(target != null && !target.is(dragging)) {
+                IMAGE_DRAGGER.clearTarget();
+                IMAGE_DRAGGER._dragging = null;
+                dragging.remove();
+                target.after(dragging);
+                IMAGE_DRAGGER.connect();
+            }
         }
     }
 
