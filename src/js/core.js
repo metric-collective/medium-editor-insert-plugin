@@ -655,4 +655,6 @@
         });
     };
 
+    window.console.log('hiiiyyy');
+
 })(jQuery, window, document);

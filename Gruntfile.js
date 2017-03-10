@@ -137,6 +137,13 @@ module.exports = function (grunt) {
                 options: {
                     debounceDelay: 250
                 }
+            },
+            js: {
+                files: 'src/js/**/*.js',
+                tasks: ['js'],
+                options: {
+                    debounceDelay: 250
+                }
             }
         },
 
@@ -153,7 +160,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('test', ['jscs', 'jshint', 'jasmine']);
-    grunt.registerTask('js', ['test', 'handlebars', 'concat', 'uglify']);
+    grunt.registerTask('js', ['handlebars', 'concat', 'uglify']);
     grunt.registerTask('css', ['sass', 'autoprefixer', 'csso', 'usebanner']);
     grunt.registerTask('default', ['js', 'css']);
 };

@@ -820,6 +820,8 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
         });
     };
 
+    window.console.log('hiiiyyy');
+
 })(jQuery, window, document);
 
 ; (function ($, window, document, undefined) {
@@ -1627,25 +1629,26 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                 }
             },
             sorting: function () {
-                var that = this;
-
-                $('.medium-insert-images').sortable({
-                    group: 'medium-insert-images',
-                    containerSelector: '.medium-insert-images',
-                    itemSelector: 'figure',
-                    placeholder: '<figure class="placeholder">',
-                    handle: 'img',
-                    nested: false,
-                    vertical: false,
-                    afterMove: function () {
-                        that.core.triggerInput();
-                    }
-                });
+                // var that = this;
+                //
+                // $('.medium-insert-images').sortable({
+                //     group: 'medium-insert-images',
+                //     containerSelector: '.medium-insert-images',
+                //     itemSelector: 'figure',
+                //     placeholder: '<figure class="placeholder">',
+                //     handle: 'img',
+                //     nested: false,
+                //     vertical: false,
+                //     afterMove: function () {
+                //         that.core.triggerInput();
+                //     }
+                // });
             },
             messages: {
                 acceptFileTypesError: 'This file is not in a supported format: ',
                 maxFileSizeError: 'This file is too big: '
             }
+            // uploadError: function($el, data) {}
             // uploadCompleted: function ($el, data) {}
         };
 
@@ -1822,7 +1825,14 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             uploadErrors.push(this.options.messages.maxFileSizeError + file.name);
         }
         if (uploadErrors.length > 0) {
+            if (this.options.uploadFailed && typeof this.options.uploadFailed === "function") {
+                this.options.uploadFailed(uploadErrors, data);
+
+                return;
+            }
+
             alert(uploadErrors.join("\n"));
+
             return;
         }
 
