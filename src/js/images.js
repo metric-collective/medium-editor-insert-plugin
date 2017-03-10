@@ -522,7 +522,8 @@
                 }
 
                 if ($sibling && $sibling.hasClass('medium-insert-images')) {
-                    images.push($sibling.find('img'));
+                    // images.push($sibling.find('img'));
+                    console.log('would be sibling');
                 }
 
                 // If text is selected, find images in the selection

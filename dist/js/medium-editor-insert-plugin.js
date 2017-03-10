@@ -23,7 +23,6 @@
 
             Handlebars = require('handlebars/runtime');
             MediumEditor = require('medium-editor');
-            require('jquery-sortable');
             require('blueimp-file-upload');
 
             factory(jQuery, Handlebars, MediumEditor);
@@ -2087,7 +2086,8 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                 }
 
                 if ($sibling && $sibling.hasClass('medium-insert-images')) {
-                    images.push($sibling.find('img'));
+                    // images.push($sibling.find('img'));
+                    console.log('would be sibling');
                 }
 
                 // If text is selected, find images in the selection
