@@ -843,16 +843,6 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                     label: '<span class="fa fa-align-justify"></span>'
                     // added: function ($el) {},
                     // removed: function ($el) {}
-                },
-                left: {
-                    label: '<span class="fa fa-align-left"></span>'
-                    // added: function ($el) {},
-                    // removed: function ($el) {}
-                },
-                right: {
-                    label: '<span class="fa fa-align-right"></span>'
-                    // added: function ($el) {},
-                    // removed: function ($el) {}
                 }
             },
             actions: {
@@ -1606,16 +1596,6 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                     // added: function ($el) {},
                     // removed: function ($el) {}
                 },
-                right: {
-                    label: '<span class="fa fa-align-right"></span>'
-                    // added: function ($el) {},
-                    // removed: function ($el) {}
-                },
-                grid: {
-                    label: '<span class="fa fa-th"></span>'
-                    // added: function ($el) {},
-                    // removed: function ($el) {}
-                }
             },
             actions: {
                 remove: {
