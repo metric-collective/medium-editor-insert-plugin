@@ -44,20 +44,7 @@
                 }
             },
             sorting: function () {
-                // var that = this;
-                //
-                // $('.medium-insert-images').sortable({
-                //     group: 'medium-insert-images',
-                //     containerSelector: '.medium-insert-images',
-                //     itemSelector: 'figure',
-                //     placeholder: '<figure class="placeholder">',
-                //     handle: 'img',
-                //     nested: false,
-                //     vertical: false,
-                //     afterMove: function () {
-                //         that.core.triggerInput();
-                //     }
-                // });
+                IMAGE_DRAGGER.connect();
             },
             messages: {
                 acceptFileTypesError: 'This file is not in a supported format: ',
@@ -758,6 +745,67 @@
     Images.prototype.sorting = function () {
         $.proxy(this.options.sorting, this)();
     };
+
+    /**
+     * Drag/Drop Controller
+     */
+
+    var IMAGE_DRAGGER = {};
+
+    IMAGE_DRAGGER.connect = function() {
+        $('.medium-insert-images').on('dragstart', IMAGE_DRAGGER.dragStart);
+        $('.medium-insert-images').on('dragend', IMAGE_DRAGGER.dragEnd);
+        $('body').on('dragenter', IMAGE_DRAGGER.dragEnter);
+        $('body').on('drop', IMAGE_DRAGGER.drop);
+    }
+
+    IMAGE_DRAGGER.dragStart = function(event) {
+        var $target = $(event.currentTarget);
+        IMAGE_DRAGGER._dragging = $target;
+    }
+
+    IMAGE_DRAGGER.dragEnd = function() {
+        if(IMAGE_DRAGGER._dragging != null) {
+            IMAGE_DRAGGER._dragging = null;
+            IMAGE_DRAGGER.clearTarget();
+        }
+    }
+
+    IMAGE_DRAGGER.dragEnter = function(event) {
+        if(IMAGE_DRAGGER._dragging != null) {
+            IMAGE_DRAGGER.clearTarget();
+            var dropTarget = IMAGE_DRAGGER.findDropTarget(event.target);
+            if(dropTarget != null) {
+                dropTarget.addClass('medium-insert-images-drop-target');
+            }
+        }
+    }
+
+    IMAGE_DRAGGER.drop = function(event) {
+        if(IMAGE_DRAGGER._dragging != null) {
+            var dragging = IMAGE_DRAGGER._dragging;
+            var target = IMAGE_DRAGGER.findDropTarget(event.target);
+            IMAGE_DRAGGER.clearTarget();
+            IMAGE_DRAGGER._dragging = null;
+            dragging.remove();
+            target.after(dragging);
+            IMAGE_DRAGGER.connect();
+        }
+    }
+
+    IMAGE_DRAGGER.findDropTarget = function(target) {
+        if(target.parentNode != null && target.parentNode.classList != null) {
+            if(target.parentNode.classList.contains('medium-editor-element')) {
+                return $(target);
+            } else {
+                return IMAGE_DRAGGER.findDropTarget(target.parentNode);
+            }
+        }
+    }
+
+    IMAGE_DRAGGER.clearTarget = function() {
+        $('.medium-insert-images-drop-target').removeClass('medium-insert-images-drop-target');
+    }
 
     /** Plugin initialization */
 
