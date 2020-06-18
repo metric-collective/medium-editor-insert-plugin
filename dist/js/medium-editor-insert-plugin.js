@@ -577,7 +577,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                 }
             });
 
-            if ($p.length && ($p.text().trim() === '') && !activeAddon) {
+            if ($p.length && (($p.text().trim() === '' && !activeAddon) || activeAddon === 'images')) {
                 $p.addClass('medium-insert-active');
 
                 if (activeAddon === 'images') {
